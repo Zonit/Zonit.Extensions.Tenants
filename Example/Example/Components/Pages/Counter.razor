@@ -1,0 +1,37 @@
+﻿@page "/counter"
+@using Zonit.Extensions.Tenants;
+
+@rendermode InteractiveServer
+
+@inject ITenantProvider TenantProvider
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current @Name count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    public string? Name { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var site = TenantProvider.GetSetting<SiteSetting>().Value;
+
+        if (site is null)
+            return;
+
+        Name = site.Title;
+
+        Console.WriteLine($"Site Name: {site.Title}");
+    }
+}

@@ -1,0 +1,32 @@
+﻿@page "/"
+
+@using Zonit.Extensions.Tenants;
+
+<PageTitle>Home</PageTitle>
+
+@inject ITenantProvider TenantProvider
+
+<h1>Hello, world!</h1>
+
+<h2>@Name</h2>
+
+Welcome to your new app.
+
+
+@code {
+
+    public string? Name { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var site = TenantProvider.GetSetting<SiteSetting>().Value;
+
+        if (site is null)
+            return;
+
+        Name = site.Title;
+
+        Console.WriteLine($"Site Name: {site.Title}");
+    }
+
+}
