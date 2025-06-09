@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish:
+  publish: 
     uses: Zonit/.github/.github/workflows/reusable-publish-nuget.yml@main
     with:
       source_directory: 'Source'
