@@ -344,7 +344,6 @@ public class ThemeSettingsModel
     /// Kolor ostrzeżenia.
     /// </summary>
     [Required]
-    [StringLength(7, MinimumLength = 4)]
     [Display(Name = "Warning Color", Description = "Color used to indicate warning states and caution")]
     [ColorPicker]
     public string WarningColor { get; set; } = "#F59E0B";
@@ -361,7 +360,6 @@ public class ThemeSettingsModel
     /// Kolor tła.
     /// </summary>
     [Required]
-    [StringLength(7, MinimumLength = 4)]
     [Display(Name = "Background Color", Description = "Main background color of the website")]
     [ColorPicker]
     public string BackgroundColor { get; set; } = "#FFFFFF";

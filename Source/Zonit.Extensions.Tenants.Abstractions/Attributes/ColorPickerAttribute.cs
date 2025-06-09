@@ -10,13 +10,33 @@ namespace Zonit.Extensions.Tenants;
 [AttributeUsage(AttributeTargets.Property)]
 public partial class ColorPickerAttribute : ValidationAttribute
 {
+    private readonly StringLengthAttribute _lengthValidator;
+
     /// <summary>
     /// Default error message for invalid HEX color.
     /// </summary>
     public ColorPickerAttribute()
         : base("Please provide a valid HEX color (e.g., #123ABC).")
     {
+        // Allow either #RGB (4 chars) or #RRGGBB (7 chars)
+        // Using StringLength with MinimumLength and MaximumLength set to handle both lengths
+        // Would be better with a list of allowed lengths, but StringLength doesn't support that
+        _lengthValidator = new StringLengthAttribute(7)
+        {
+            MinimumLength = 4,
+            ErrorMessage = "Color must be in #RGB (4 characters) or #RRGGBB (7 characters) format."
+        };
     }
+
+    /// <summary>
+    /// Gets the maximum allowed length for the HEX color.
+    /// </summary>
+    public int MaximumLength => _lengthValidator.MaximumLength;
+
+    /// <summary>
+    /// Gets the minimum allowed length for the HEX color.
+    /// </summary>
+    public int MinimumLength => _lengthValidator.MinimumLength;
 
     /// <summary>
     /// Validates whether the value is a valid HEX color string and checks its length.
@@ -31,10 +51,16 @@ public partial class ColorPickerAttribute : ValidationAttribute
 
         if (value is string str)
         {
-            // Accept only #RGB (4 chars) or #RRGGBB (7 chars)
+            // First validate length using StringLength validator
+            var lengthResult = _lengthValidator.GetValidationResult(str, validationContext);
+            if (lengthResult != ValidationResult.Success)
+                return lengthResult;
+
+            // Only accept exact lengths of 4 or 7
             if (str.Length != 4 && str.Length != 7)
                 return new ValidationResult("Color must be in #RGB or #RRGGBB format.");
 
+            // Then validate format using regex
             if (HexColorRegex().IsMatch(str))
                 return ValidationResult.Success;
         }
