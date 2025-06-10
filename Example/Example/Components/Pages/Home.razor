@@ -20,6 +20,7 @@ Welcome to your new app.
     protected override void OnInitialized()
     {
         var site = TenantProvider.GetSetting<SiteSetting>().Value;
+        var theme = TenantProvider.GetSetting<ThemeSetting>().Value;
 
         if (site is null)
             return;
@@ -27,6 +28,7 @@ Welcome to your new app.
         Name = site.Title;
 
         Console.WriteLine($"Site Name: {site.Title}");
+        Console.WriteLine($"Theme: {theme.PrimaryColor}");
     }
 
 }

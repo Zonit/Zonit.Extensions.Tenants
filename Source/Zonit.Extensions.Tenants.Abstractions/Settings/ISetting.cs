@@ -5,15 +5,14 @@ public interface ISetting
     string Key { get; }
     string Name { get; }
     string Description { get; }
-
-    object? Value { get; }
+    object Value { get; }
 }
 
 public interface ISetting<T> : ISetting
 {
     new T Value { get; set; }
     IReadOnlyCollection<T>? Templates { get; }
-    object? ISetting.Value => Value;
+    object ISetting.Value => Value!;
 }
 
 public abstract class Setting<T> : ISetting<T>

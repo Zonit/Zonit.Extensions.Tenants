@@ -30,7 +30,7 @@ internal class TenantService(IHttpContextAccessor _httpContextAccessor) : ITenan
         var setting = new T();
         var variable = tenant.Variables.FirstOrDefault(v => v.Key == setting.Key);
 
-        if (variable != null)
+        if (variable is not null)
         {
             var valueProperty = typeof(T).GetProperties()
                 .FirstOrDefault(p => p.Name == "Value");
@@ -62,7 +62,17 @@ internal class TenantService(IHttpContextAccessor _httpContextAccessor) : ITenan
                             [jsonValue, null]
                         );
 
-                        valueProperty.SetValue(setting, deserializedValue);
+                        // Sprawdź czy właściwość ma setter
+                        if (valueProperty.SetMethod != null)
+                        {
+                            valueProperty.SetValue(setting, deserializedValue);
+                        }
+                        else if (setting is ISetting<object> genericSetting)
+                        {
+                            // Próbujemy dostępu przez generyczny interfejs, który ma setter
+                            typeof(ISetting<>).MakeGenericType(valueType)
+                                .GetProperty("Value")?.SetValue(setting, deserializedValue);
+                        }
                     }
                 }
                 catch (Exception)
@@ -70,6 +80,31 @@ internal class TenantService(IHttpContextAccessor _httpContextAccessor) : ITenan
                     // Jeśli deserializacja się nie powiedzie, pozostaw domyślną wartość
                 }
             }
+        }
+        else
+        {
+            // Jeśli nie znaleziono zmiennej, spróbuj ustawić domyślną wartość
+            var valueProperty = typeof(T).GetProperties()
+                .FirstOrDefault(p => p.Name == "Value");
+
+            if (valueProperty != null && valueProperty.SetMethod != null)
+            {
+                // Próbujemy ustawić domyślną wartość tylko jeśli property ma setter
+                valueProperty.SetValue(setting, Activator.CreateInstance(valueProperty.PropertyType));
+            }
+            else if (setting is ISetting<object> genericSetting && valueProperty is not null)
+            {
+                // Próbujemy dostępu przez generyczny interfejs
+                var valueType = valueProperty.PropertyType;
+                var genericInterface = typeof(ISetting<>).MakeGenericType(valueType);
+                var genericProperty = genericInterface.GetProperty("Value");
+
+                if (genericProperty?.SetMethod != null)
+                {
+                    genericProperty.SetValue(setting, Activator.CreateInstance(valueType));
+                }
+            }
+            // W przeciwnym razie pozostawiamy wartość domyślną
         }
 
         return setting;
