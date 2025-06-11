@@ -31,29 +31,14 @@ public class ThemeSettingsModel
 
     // === NEUTRAL COLORS ===
     [Required]
-    [Display(Name = "Background", Description = "Main page background")]
+    [Display(Name = "Neutral", Description = "Main page background")]
     [ColorPicker]
-    public string BackgroundColor { get; set; } = "#FFFFFF";
+    public string NeutralColor { get; set; } = "#FFFFFF";
 
     [Required]
-    [Display(Name = "Surface", Description = "Background for cards and elevated content")]
+    [Display(Name = "Content", Description = "Main text color")]
     [ColorPicker]
-    public string SurfaceColor { get; set; } = "#F9FAFB";
-
-    [Required]
-    [Display(Name = "Text", Description = "Main text color")]
-    [ColorPicker]
-    public string TextColor { get; set; } = "#111827";
-
-    [Required]
-    [Display(Name = "Text Muted", Description = "Secondary text color")]
-    [ColorPicker]
-    public string TextMutedColor { get; set; } = "#6B7280";
-
-    [Required]
-    [Display(Name = "Border", Description = "Color for borders and dividers")]
-    [ColorPicker]
-    public string BorderColor { get; set; } = "#E5E7EB";
+    public string ContentColor { get; set; } = "#111827";
 
     // === TYPOGRAPHY ===
     [Required]
