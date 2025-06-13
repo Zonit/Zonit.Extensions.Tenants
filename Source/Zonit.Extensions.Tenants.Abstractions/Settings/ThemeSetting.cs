@@ -15,30 +15,35 @@ public class ThemeSettingsModel
 {
     // === BRAND COLORS ===
     [Required]
-    [Display(Name = "Primary Color", Description = "Main brand color used throughout the site")]
+    [Display(Name = "Primary Color", Description = "Main brand color used throughout the site for buttons and key elements")]
     [ColorPicker]
-    public string PrimaryColor { get; set; } = "#3B82F6";
+    public string PrimaryColor { get; set; } = "#2563EB"; // Professional Blue
 
     [Required]
-    [Display(Name = "Secondary Color", Description = "Supporting brand color for accents")]
+    [Display(Name = "Secondary Color", Description = "Supporting brand color for accents and secondary elements")]
     [ColorPicker]
-    public string SecondaryColor { get; set; } = "#8B5CF6";
+    public string SecondaryColor { get; set; } = "#7C3AED"; // Deep Purple
 
     [Required]
-    [Display(Name = "Accent Color", Description = "Highlight color for special elements")]
+    [Display(Name = "Accent Color", Description = "Highlight color for special elements and call-to-action buttons")]
     [ColorPicker]
-    public string AccentColor { get; set; } = "#F59E0B";
+    public string AccentColor { get; set; } = "#DC2626"; // Business Red
 
-    // === NEUTRAL COLORS ===
+    // === SURFACE COLORS ===
     [Required]
-    [Display(Name = "Neutral", Description = "Main page background")]
+    [Display(Name = "Background Color", Description = "Main page background color and sections")]
     [ColorPicker]
-    public string NeutralColor { get; set; } = "#FFFFFF";
+    public string NeutralColor { get; set; } = "#F1F5F9"; // Darker neutral background
 
     [Required]
-    [Display(Name = "Content", Description = "Main text color")]
+    [Display(Name = "Surface Color", Description = "Background color for cards, panels and elevated elements")]
     [ColorPicker]
-    public string ContentColor { get; set; } = "#111827";
+    public string SurfaceColor { get; set; } = "#FFFFFF"; // White surface
+
+    [Required]
+    [Display(Name = "Text Color", Description = "Primary text color for content and headings")]
+    [ColorPicker]
+    public string ContentColor { get; set; } = "#0F172A"; // Dark text
 
     // === TYPOGRAPHY ===
     [Required]
