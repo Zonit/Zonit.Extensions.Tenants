@@ -18,13 +18,13 @@ public partial class ColorPickerAttribute : ValidationAttribute
     public ColorPickerAttribute()
         : base("Please provide a valid HEX color (e.g., #123ABC).")
     {
-        // Allow either #RGB (4 chars) or #RRGGBB (7 chars)
+        // Allow either #RGB (4 chars) or #RRGGBB (9 chars)
         // Using StringLength with MinimumLength and MaximumLength set to handle both lengths
         // Would be better with a list of allowed lengths, but StringLength doesn't support that
-        _lengthValidator = new StringLengthAttribute(7)
+        _lengthValidator = new StringLengthAttribute(9)
         {
             MinimumLength = 4,
-            ErrorMessage = "Color must be in #RGB (4 characters) or #RRGGBB (7 characters) format."
+            ErrorMessage = "Color must be in #RGB (4 characters) or #RRGGBB (9 characters) format."
         };
     }
 
@@ -56,8 +56,8 @@ public partial class ColorPickerAttribute : ValidationAttribute
             if (lengthResult != ValidationResult.Success)
                 return lengthResult;
 
-            // Only accept exact lengths of 4 or 7
-            if (str.Length != 4 && str.Length != 7)
+            // Only accept exact lengths of 4 or 9
+            if (str.Length != 4 && str.Length != 9)
                 return new ValidationResult("Color must be in #RGB or #RRGGBB format.");
 
             // Then validate format using regex
