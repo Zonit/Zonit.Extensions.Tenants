@@ -6,6 +6,7 @@ namespace Zonit.Extensions.Tenants;
 /// <summary>
 /// Attribute to mark a property as a color and validate HEX color format and length.
 /// Can be used for UI rendering (e.g., color picker) and ensures the value is a valid HEX color.
+/// Supports both RGB (#RRGGBB) and RGBA (#RRGGBBAA) formats, as well as short forms (#RGB and #RGBA).
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 public partial class ColorPickerAttribute : ValidationAttribute
@@ -16,15 +17,13 @@ public partial class ColorPickerAttribute : ValidationAttribute
     /// Default error message for invalid HEX color.
     /// </summary>
     public ColorPickerAttribute()
-        : base("Please provide a valid HEX color (e.g., #123ABC).")
+        : base("Please provide a valid HEX color (e.g., #123ABC or #123ABCFF).")
     {
-        // Allow either #RGB (4 chars) or #RRGGBB (9 chars)
-        // Using StringLength with MinimumLength and MaximumLength set to handle both lengths
-        // Would be better with a list of allowed lengths, but StringLength doesn't support that
+        // Allow #RGB (4 chars), #RGBA (5 chars), #RRGGBB (7 chars), or #RRGGBBAA (9 chars)
         _lengthValidator = new StringLengthAttribute(9)
         {
             MinimumLength = 4,
-            ErrorMessage = "Color must be in #RGB (4 characters) or #RRGGBB (9 characters) format."
+            ErrorMessage = "Color must be in #RGB, #RGBA, #RRGGBB, or #RRGGBBAA format."
         };
     }
 
@@ -56,9 +55,9 @@ public partial class ColorPickerAttribute : ValidationAttribute
             if (lengthResult != ValidationResult.Success)
                 return lengthResult;
 
-            // Only accept exact lengths of 4 or 9
-            if (str.Length != 4 && str.Length != 9)
-                return new ValidationResult("Color must be in #RGB or #RRGGBB format.");
+            // Only accept exact lengths of 4, 5, 7, or 9 characters
+            if (str.Length != 4 && str.Length != 5 && str.Length != 7 && str.Length != 9)
+                return new ValidationResult("Color must be in #RGB, #RGBA, #RRGGBB, or #RRGGBBAA format.");
 
             // Then validate format using regex
             if (HexColorRegex().IsMatch(str))
@@ -69,8 +68,8 @@ public partial class ColorPickerAttribute : ValidationAttribute
     }
 
     /// <summary>
-    /// Regex for validating HEX color strings (#RGB or #RRGGBB).
+    /// Regex for validating HEX color strings (#RGB, #RGBA, #RRGGBB, or #RRGGBBAA).
     /// </summary>
-    [GeneratedRegex("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")]
+    [GeneratedRegex("^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$")]
     private static partial Regex HexColorRegex();
 }
