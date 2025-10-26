@@ -16,7 +16,7 @@ internal class TenantService(IHttpContextAccessor _httpContextAccessor) : ITenan
             {
                 return tenantObj as Tenant;
             }
-            return null;
+            return null; 
         }
     }
 
