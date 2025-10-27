@@ -19,10 +19,9 @@ public class MaintenanceSetting : Setting<MaintenanceSettingsModel>
 public class MaintenanceSettingsModel
 {
     /// <summary>
-    /// Indicates whether the website is active and accessible to users.
-  /// When set to false, the maintenance message will be displayed instead.
- /// </summary>
-    [Display(Name = "Site Active", Description = "Controls whether the website is accessible to users. When disabled, visitors will see the maintenance message.")]
+    /// Indicates whether maintenance mode is active. When set to true, the maintenance message will be displayed to visitors.
+    /// </summary>
+    [Display(Name = "Maintenance Active", Description = "Controls whether maintenance mode is active. When enabled, visitors will see the maintenance message.")]
     [Required]
     public bool IsActive { get; set; } = true;
 
