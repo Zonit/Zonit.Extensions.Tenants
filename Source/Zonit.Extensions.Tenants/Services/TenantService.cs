@@ -1,12 +1,19 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 using System.Reflection;
-using Zonit.Extensions.Tenants.Abstractions.Settings;
+using Zonit.Extensions.Tenants.Abstractions.Models;
 
 namespace Zonit.Extensions.Tenants.Services;
 
 internal class TenantService(IHttpContextAccessor _httpContextAccessor) : ITenantProvider
 {
+    private TenantSettings? _settings;
+
+    /// <summary>
+    /// Gets strongly-typed access to all tenant settings.
+    /// </summary>
+    public TenantSettings Settings => _settings ??= new TenantSettings(this);
+
     private Tenant? CurrentTenant
     {
         get

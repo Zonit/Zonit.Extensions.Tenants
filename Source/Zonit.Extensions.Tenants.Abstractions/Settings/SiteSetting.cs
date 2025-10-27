@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Zonit.Extensions.Tenants.Abstractions.Settings;
+using Zonit.Extensions.Tenants.Abstractions.Models;
 
 namespace Zonit.Extensions.Tenants;
 

@@ -1,4 +1,4 @@
-﻿namespace Zonit.Extensions.Tenants.Abstractions.Settings;
+﻿namespace Zonit.Extensions.Tenants.Abstractions.Models;
 
 public interface ISetting
 {

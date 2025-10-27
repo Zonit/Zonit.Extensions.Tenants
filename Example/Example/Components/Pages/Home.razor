@@ -19,8 +19,8 @@ Welcome to your new app.
 
     protected override void OnInitialized()
     {
-        var site = TenantProvider.GetSetting<SiteSetting>().Value;
-        var theme = TenantProvider.GetSetting<ThemeSetting>().Value;
+        var site = TenantProvider.Settings.Site;
+        var theme = TenantProvider.Settings.Theme;
 
         if (site is null)
             return;
