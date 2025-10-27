@@ -9,56 +9,28 @@ public static class MiddlewareExtensions
         => builder.UseMiddleware<TenantMiddleware>();
 }
 
-public class TenantMiddleware(RequestDelegate next)
+public class TenantMiddleware(RequestDelegate next, ITenantManager tenantManager)
 {
-    private readonly RequestDelegate _next = next;
+    private const string TenantContextKey = "tenant";
 
     public async Task Invoke(HttpContext context)
     {
-        var endpoint = context.GetEndpoint();
+        // Fast path - extract domain directly without any checks
+        var domain = context.Request.Host.Host;
 
-        if (endpoint is not null)
+        // Only proceed if we have a domain
+        if (!string.IsNullOrEmpty(domain))
         {
-            var domain = context.Request.Host.Host;
+            // GetTenantAsync should be cached in the implementation (e.g., decorator with IMemoryCache)
+            // This middleware stays thin and delegates caching responsibility to the business layer
+            var tenant = await tenantManager.GetTenantAsync(domain);
 
-            if (!string.IsNullOrEmpty(domain))
+            if (tenant is not null)
             {
-                var tenantManager = context.RequestServices.GetRequiredService<ITenantManager>();
-                var tenant = await tenantManager.GetTenantAsync(domain);
-                context.Items["tenant"] = tenant;
+                context.Items[TenantContextKey] = tenant;
             }
         }
 
-        await _next(context);
+        await next(context);
     }
 }
-
-
-//public class TenantMiddleware(RequestDelegate _next, ITenantManager _tenantManager)
-//{
-//    public async Task Invoke(HttpContext context)
-//    {
-//        var endpoint = context.GetEndpoint();
-
-//        // Zmodyfikowane sprawdzenie - akceptujemy wszystkie endpointy
-//        // lub sprawdzamy różne typy metadanych routingu
-//        if (endpoint is not null)
-//        {
-//            // Sprawdzanie różnych typów metadanych związanych z routingiem
-//            var hasRouting = endpoint.Metadata.GetMetadata<RouteAttribute>() != null ||
-//                             endpoint.Metadata.GetMetadata<RouteEndpointBuilder>() != null ||
-//                             !string.IsNullOrEmpty(endpoint.DisplayName);
-
-//            // Dla Blazora i minimalnych API zawsze przechodzimy dalej
-//            var domain = context.Request.Host.Host;
-
-//            if (!string.IsNullOrEmpty(domain))
-//            {
-//                var tenant = await _tenantManager.GetTenantAsync(domain);
-//                context.Items["tenant"] = tenant;
-//            }
-//        }
-
-//        await _next(context);
-//    }
-//}
