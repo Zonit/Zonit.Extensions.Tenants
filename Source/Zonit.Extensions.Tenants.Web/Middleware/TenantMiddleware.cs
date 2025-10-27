@@ -9,7 +9,7 @@ public static class MiddlewareExtensions
         => builder.UseMiddleware<TenantMiddleware>();
 }
 
-public class TenantMiddleware(RequestDelegate next, ITenantManager tenantManager)
+public class TenantMiddleware(RequestDelegate next)
 {
     private const string TenantContextKey = "tenant";
 
@@ -21,6 +21,9 @@ public class TenantMiddleware(RequestDelegate next, ITenantManager tenantManager
         // Only proceed if we have a domain
         if (!string.IsNullOrEmpty(domain))
         {
+            // Resolve ITenantManager from scoped services
+            var tenantManager = context.RequestServices.GetRequiredService<ITenantManager>();
+            
             // GetTenantAsync should be cached in the implementation (e.g., decorator with IMemoryCache)
             // This middleware stays thin and delegates caching responsibility to the business layer
             var tenant = await tenantManager.GetTenantAsync(domain);
