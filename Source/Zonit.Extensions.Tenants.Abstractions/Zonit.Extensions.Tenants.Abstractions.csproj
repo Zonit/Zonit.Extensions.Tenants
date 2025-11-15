@@ -1,12 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<!-- Reference the source generator -->
-		<ProjectReference Include="..\Zonit.Extensions.Tenants.SourceGenerators\Zonit.Extensions.Tenants.SourceGenerators.csproj" 
-			OutputItemType="Analyzer" 
-		    ReferenceOutputAssembly="false" />
-	</ItemGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Reference the source generator -->
+    <ProjectReference Include="..\Zonit.Extensions.Tenants.SourceGenerators\Zonit.Extensions.Tenants.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
 </Project>
