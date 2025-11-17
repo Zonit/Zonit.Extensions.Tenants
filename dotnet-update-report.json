@@ -1,4 +1,16 @@
 {
+  "Timestamp": "2025-11-17 02:42:22",
+  "Summary": {
+    "FrameworksSet": "net8.0;net9.0;net10.0",
+    "PackagesChanged": 3,
+    "FrameworkSpecificGroups": 3,
+    "DirectoryPackagesPropsUpdated": true,
+    "PackagesConfigured": 4,
+    "ProjectsUpdated": 5
+  },
+  "ProjectsFound": 5,
+  "PackagesFound": 4,
+  "ChangeSummaryText": "Microsoft.CodeAnalysis.Analyzers : 3.11.0 -> 4.14.0",
   "TargetFrameworks": [
     "net8.0",
     "net9.0",
@@ -6,29 +18,22 @@
   ],
   "PackageChanges": [
     {
-      "Package": "Microsoft.Extensions.DependencyInjection.Abstractions",
-      "Framework": "net9.0",
-      "OldVersion": "9.0.5",
-      "NewVersion": "9.0.11"
+      "Package": "Microsoft.CodeAnalysis.Analyzers",
+      "Framework": "net8.0",
+      "OldVersion": "3.11.0",
+      "NewVersion": "4.14.0"
     },
     {
-      "Package": "Microsoft.Extensions.DependencyInjection.Abstractions",
+      "Package": "Microsoft.CodeAnalysis.Analyzers",
+      "Framework": "net9.0",
+      "OldVersion": "3.11.0",
+      "NewVersion": "4.14.0"
+    },
+    {
+      "Package": "Microsoft.CodeAnalysis.Analyzers",
       "Framework": "net10.0",
-      "OldVersion": "10.0.0-preview.4.25258.110",
-      "NewVersion": "10.0.0"
+      "OldVersion": "3.11.0",
+      "NewVersion": "4.14.0"
     }
-  ],
-  "PackagesFound": 4,
-  "ChangeSummaryText": "Microsoft.Extensions.DependencyInjection.Abstractions [net10.0]: 10.0.0-preview.4.25258.110 → 10.0.0\nMicrosoft.Extensions.DependencyInjection.Abstractions [net9.0]: 9.0.5 → 9.0.11",
-  "Summary": {
-    "PackagesChanged": 2,
-    "CommonPackages": 3,
-    "FrameworkSpecificPackages": 1,
-    "DirectoryPackagesPropsUpdated": true,
-    "FrameworksSet": "net8.0;net9.0;net10.0",
-    "PackagesConfigured": 4,
-    "ProjectsUpdated": 5
-  },
-  "Timestamp": "2025-11-16 05:04:34",
-  "ProjectsFound": 5
+  ]
 }
