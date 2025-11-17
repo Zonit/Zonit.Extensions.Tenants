@@ -4,31 +4,37 @@
     "net9.0",
     "net10.0"
   ],
-  "PackageChanges": [
-    {
-      "Package": "Microsoft.Extensions.DependencyInjection.Abstractions",
-      "Framework": "net9.0",
-      "OldVersion": "9.0.5",
-      "NewVersion": "9.0.11"
-    },
-    {
-      "Package": "Microsoft.Extensions.DependencyInjection.Abstractions",
-      "Framework": "net10.0",
-      "OldVersion": "10.0.0-preview.4.25258.110",
-      "NewVersion": "10.0.0"
-    }
-  ],
+  "Timestamp": "2025-11-17 05:24:50",
   "PackagesFound": 4,
-  "ChangeSummaryText": "Microsoft.Extensions.DependencyInjection.Abstractions [net10.0]: 10.0.0-preview.4.25258.110 → 10.0.0\nMicrosoft.Extensions.DependencyInjection.Abstractions [net9.0]: 9.0.5 → 9.0.11",
+  "ProjectsFound": 5,
+  "ChangeSummaryText": "Microsoft.AspNetCore.Http.Abstractions : 2.3.0 -> 2\nMicrosoft.CodeAnalysis.Analyzers : 3.11.0 -> 4\nMicrosoft.CodeAnalysis.CSharp : 4.14.0 -> 4",
   "Summary": {
-    "PackagesChanged": 2,
-    "CommonPackages": 3,
-    "FrameworkSpecificPackages": 1,
     "DirectoryPackagesPropsUpdated": true,
     "FrameworksSet": "net8.0;net9.0;net10.0",
     "PackagesConfigured": 4,
-    "ProjectsUpdated": 5
+    "ProjectsUpdated": 5,
+    "PackagesChanged": 3,
+    "CommonPackages": 3,
+    "FrameworkSpecificPackages": 1
   },
-  "Timestamp": "2025-11-16 05:04:34",
-  "ProjectsFound": 5
+  "PackageChanges": [
+    {
+      "Package": "Microsoft.AspNetCore.Http.Abstractions",
+      "Framework": "common",
+      "OldVersion": "2.3.0",
+      "NewVersion": "2"
+    },
+    {
+      "Package": "Microsoft.CodeAnalysis.Analyzers",
+      "Framework": "common",
+      "OldVersion": "3.11.0",
+      "NewVersion": "4"
+    },
+    {
+      "Package": "Microsoft.CodeAnalysis.CSharp",
+      "Framework": "common",
+      "OldVersion": "4.14.0",
+      "NewVersion": "4"
+    }
+  ]
 }
