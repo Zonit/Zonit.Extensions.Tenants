@@ -4,31 +4,55 @@
     "net9.0",
     "net10.0"
   ],
+  "PackagesFound": 4,
   "PackageChanges": [
+    {
+      "Package": "Microsoft.AspNetCore.Http.Abstractions",
+      "Framework": "common",
+      "OldVersion": "(new)",
+      "NewVersion": "2"
+    },
+    {
+      "Package": "Microsoft.CodeAnalysis.Analyzers",
+      "Framework": "common",
+      "OldVersion": "(new)",
+      "NewVersion": "4"
+    },
+    {
+      "Package": "Microsoft.CodeAnalysis.CSharp",
+      "Framework": "common",
+      "OldVersion": "(new)",
+      "NewVersion": "4"
+    },
+    {
+      "Package": "Microsoft.Extensions.DependencyInjection.Abstractions",
+      "Framework": "net8.0",
+      "OldVersion": "(new)",
+      "NewVersion": "8.0.2"
+    },
     {
       "Package": "Microsoft.Extensions.DependencyInjection.Abstractions",
       "Framework": "net9.0",
-      "OldVersion": "9.0.5",
+      "OldVersion": "(new)",
       "NewVersion": "9.0.11"
     },
     {
       "Package": "Microsoft.Extensions.DependencyInjection.Abstractions",
       "Framework": "net10.0",
-      "OldVersion": "10.0.0-preview.4.25258.110",
+      "OldVersion": "(new)",
       "NewVersion": "10.0.0"
     }
   ],
-  "PackagesFound": 4,
-  "ChangeSummaryText": "Microsoft.Extensions.DependencyInjection.Abstractions [net10.0]: 10.0.0-preview.4.25258.110 → 10.0.0\nMicrosoft.Extensions.DependencyInjection.Abstractions [net9.0]: 9.0.5 → 9.0.11",
+  "ChangeSummaryText": "Microsoft.AspNetCore.Http.Abstractions : (new) -> 2\nMicrosoft.CodeAnalysis.Analyzers : (new) -> 4\nMicrosoft.CodeAnalysis.CSharp : (new) -> 4\nMicrosoft.Extensions.DependencyInjection.Abstractions [net10.0]: (new) -> 10.0.0\nMicrosoft.Extensions.DependencyInjection.Abstractions [net8.0]: (new) -> 8.0.2\nMicrosoft.Extensions.DependencyInjection.Abstractions [net9.0]: (new) -> 9.0.11",
   "Summary": {
-    "PackagesChanged": 2,
-    "CommonPackages": 3,
-    "FrameworkSpecificPackages": 1,
     "DirectoryPackagesPropsUpdated": true,
-    "FrameworksSet": "net8.0;net9.0;net10.0",
+    "FrameworkSpecificPackages": 1,
     "PackagesConfigured": 4,
-    "ProjectsUpdated": 5
+    "ProjectsUpdated": 5,
+    "PackagesChanged": 6,
+    "FrameworksSet": "net8.0;net9.0;net10.0",
+    "CommonPackages": 3
   },
-  "Timestamp": "2025-11-16 05:04:34",
-  "ProjectsFound": 5
+  "ProjectsFound": 5,
+  "Timestamp": "2025-11-17 04:03:24"
 }
