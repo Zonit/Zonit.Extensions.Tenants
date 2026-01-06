@@ -36,7 +36,11 @@ namespace Example
 
             app.UseAntiforgery();
 
+#if NET9_0_OR_GREATER
             app.MapStaticAssets();
+#else
+            app.UseStaticFiles();
+#endif
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
 
